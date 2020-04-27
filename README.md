@@ -8,7 +8,7 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 ##### Step 3: Open browser and try to access service *http://localhost:10701/hello/andy/hee*
 - You should be able to see the correct response with json 
 ```
->{
->message: "Hello andy hee"
->}
+	{
+		message: "Hello andy hee"
+	}
 ```
