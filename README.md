@@ -1,6 +1,5 @@
 # microservice-spring-andy
 All the practices are relevant to book Manning Spring Micro-services in Action 2017.6
-
 ###Chapter 1: Welcome to the cloud, Spring
 1.At the root folder of this project, run command *mvn clean package*
 	- You will get Spring Boot project build and packaged as configuration - jar;
