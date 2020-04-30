@@ -27,3 +27,27 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 		licenseType: "PerSeat"
 	}
 ```
+##### Step 4: continue to access service *http://localhost:10702/actuator*
+- You will get system status information provided by **spring-boot-starter-actuator**
+```
+{
+	_links: {
+		self: {
+			href: "http://localhost:10702/actuator",
+			templated: false
+		},
+		health: {
+			href: "http://localhost:10702/actuator/health",
+			templated: false
+		},
+		health-path: {
+			href: "http://localhost:10702/actuator/health/{*path}",
+			templated: true
+		},
+		info: {
+			href: "http://localhost:10702/actuator/info",
+			templated: false
+		}
+	}
+}
+```
