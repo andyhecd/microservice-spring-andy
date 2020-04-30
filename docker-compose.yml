@@ -1,0 +1,48 @@
+version: '3'
+services:
+  docker-mysql:
+    restart: always
+    container_name: microservice-spring-andy-mysql
+    image: mysql
+    environment:
+      MYSQL_DATABASE: microservice-spring-andy-mysql
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+
+    ports:
+      - "6033:3306"
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root--execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+
+  chapter1:
+    restart: on-failure
+    build: ./chapter1
+    image: andyhecd/chapter1:0.0.1-SNAPSHOT
+    container_name: chapter1
+    expose:
+      - "10701"
+    ports:
+      - 10701:10701
+    environment:
+      WAIT_HOSTS: mysql:3306
+    depends_on:
+      - microservice-spring-andy-mysql
+
+  chapter2:
+    restart: on-failure
+    build: ./chapter2
+    image: andyhecd/chapter2-licensing-service:0.0.1-SNAPSHOT
+    container_name: chapter2-licensing-service
+    expose:
+      - "10702"
+    ports:
+      - 10702:10702
+    environment:
+      WAIT_HOSTS: mysql:3306
+    depends_on:
+      - microservice-spring-andy-mysql
