@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: chapter3-licensingservice
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      uri: http://localhost:10703
