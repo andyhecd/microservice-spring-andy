@@ -1,9 +1,23 @@
 spring:
-  application:
-    name: chapter3-licensingservice
   profiles:
-    active:
-      default
+    active: dev
+---
+spring:
+  profiles: prod
+  application:
+    name: licensingservice
   cloud:
-    config:
-      uri: http://localhost:10703
+     config:
+       uri: http://localhost:10703
+       label: master
+       profile: prod
+---
+spring:
+  profiles: dev
+  application:
+    name: licensingservice
+  cloud:
+     config:
+       uri: http://localhost:10703
+       label: master
+       profile: dev

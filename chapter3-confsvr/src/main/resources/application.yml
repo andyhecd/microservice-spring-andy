@@ -12,31 +12,18 @@
 ####################################
 server:
   port: 10703
-#spring:
-# cloud:
-#    config:
-#      server:
-#        encrypt.enabled: false
-#        git:
-#          uri: https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter3-confsvr/src/main/resources/config/
-#          uri: https://github.com/carnellj/config-repo/
-#          searchPaths: licensingservice,organizationservice
-#          username: andyhecd
-#          password: Xiao0001
 
 
 ####
 #Classpath and file-based solution
 ####
-
-
-spring:
-  profiles:
-    active: native
-  cloud:
-     config:
-       server:
-           native:
+#spring:
+#  profiles:
+#    active: native
+#  cloud:
+#     config:
+#       server:
+#           native:
               #searchLocations: file://<chapter 3>/confsvr/src/main/resources/config/licensingservice,
-                               #file://<chapter 3>confsvr/src/main/resources/config/organizationservice
-              searchLocations: classpath:config/,classpath:config/licensingservice
+#                               #file://<chapter 3>confsvr/src/main/resources/config/organizationservice
+#              searchLocations: classpath:config/,classpath:config/licensingservice

@@ -1,3 +1,16 @@
 spring:
   application:
     name: chapter3-configserver
+  cloud:
+    config:
+      server:
+        encrypt:
+          key: mys3cr3t
+        git:
+          uri: https://github.com/andyhecd/microservice-spring-andy
+          #uri: https://github.com/carnellj/config-repo/
+          default-label: master #配置文件分支
+          searchPaths: chapter3-confsvr/config/licensingservice,chapter3-confsvr/config/organizationservice
+          username: andyhecd
+          password: Xiao0001
+
