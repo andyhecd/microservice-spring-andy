@@ -56,9 +56,10 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 - You will get Spring Boot project build and packaged as configuration - jar;
 - You will be able to see a new docker image generated with name andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT
 - You will be able to see a new docker image generated with name andyhecd/chapter3-licensing-service:0.0.1-SNAPSHOT
-##### Step 2: continue to run command *docker run -p 10703:10703 andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT* 
-##### Step 3: continue to run command *docker run -p 10703:10703 andyhecd/chapter3-licensing-service:0.0.1-SNAPSHOT* 
-##### Step 3: Open browser and try to access service *http://localhost:10702/v1/organizations/sapibsocd/licenses/csccn_andy*
+##### Step 2: continue to run command *docker run --name microservice-mysql -p 10700:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql* 
+##### Step 3: continue to run command *docker run -dp 10703:10703 andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT* 
+##### Step 4: continue to run command *docker run -dp 11703:11703 andyhecd/chapter3-licensing-service:0.0.1-SNAPSHOT* 
+##### Step 5: Open browser and try to access service *http://localhost:10702/v1/organizations/sapibsocd/licenses/csccn_andy*
 - You should be able to see the correct response with json 
 ```
 	{
