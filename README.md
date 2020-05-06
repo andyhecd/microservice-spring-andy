@@ -61,13 +61,16 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 - Continue to run command *create database microservice;*
 ##### Step 3: continue to run command *docker run -dp 10703:10703 andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT* 
 ##### Step 4: continue to run command *docker run -dp 11703:11703 andyhecd/chapter3-licensing-service:0.0.1-SNAPSHOT* 
-##### Step 5: Open browser and try to access service *http://localhost:10702/v1/organizations/sapibsocd/licenses/csccn_andy*
+##### Step 5: Open browser and try to access service *http://localhost:11703/v1/organizations/442adb6e-fa58-47f3-9ca2-ed1fecdfe86c/licenses/38777179-7094-4200-9d61-edb101c6ea84*
 - You should be able to see the correct response with json 
 ```
 	{
-		id: "csccn_andy",
-		organizationId: "sapibsocd",
-		productName: "Test Product Name",
-		licenseType: "PerSeat"
+		licenseId: "38777179-7094-4200-9d61-edb101c6ea84",
+		organizationId: "442adb6e-fa58-47f3-9ca2-ed1fecdfe86c",
+		productName: "HR-PowerSuite",
+		licenseType: "user",
+		licenseMax: 100,
+		licenseAllocated: 4,
+		comment: "I AM A PROD PROPERTY OVERRIDE"
 	}
 ```
