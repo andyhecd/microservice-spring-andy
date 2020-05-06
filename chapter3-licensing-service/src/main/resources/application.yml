@@ -10,5 +10,6 @@ management:
       exposure:
         include: "*"
 
+#will be overwrote
 example:
   property: NaN
