@@ -1,4 +1,4 @@
-example.property: "I AM A PROD PROPERTY OVERRIDE"
+example.property: "I AM A PROD PROPERTY OVERRIDE - changed after service started"
 spring.datasource.url: jdbc:mysql://host.docker.internal:10700/microservice
 spring.datasource.username: root
 spring.datasource.password: root
