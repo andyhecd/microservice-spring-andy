@@ -1,8 +1,18 @@
 FROM openjdk:8-jdk-alpine
 EXPOSE 11703
+ARG JAR_FILE
+
 RUN  apk update && apk upgrade && apk add netcat-openbsd
 RUN mkdir -p /usr/local/chapter3
-ADD target/chapter3-licensing-service.jar /usr/local/chapter3/
+ADD target/${JAR_FILE} /usr/local/chapter3/
+
+# Add docker-compose-wait tool -------------------
+ENV WAIT_VERSION 2.7.3
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait
+RUN chmod +x /wait
+
 ADD run.sh run.sh
 RUN chmod +x run.sh
+
+ENV JAR_FILE_PATH /usr/local/chapter3/${JAR_FILE}
 CMD ./run.sh

@@ -7,15 +7,16 @@ services:
     environment:
       MYSQL_DATABASE: microservice
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
     ports:
-      - "10700:3306"
+      - 10700:3306
     healthcheck:
       test: "/usr/bin/mysql --user=root --password=root--execute \"SHOW DATABASES;\""
       interval: 2s
-      timeout: 20s
+      timeout: 300s
       retries: 10
 
   chapter1:
@@ -24,7 +25,7 @@ services:
     image: andyhecd/chapter1:0.0.1-SNAPSHOT
     container_name: chapter1
     expose:
-      - "10701"
+      - 10701
     ports:
       - 10701:10701
 
@@ -34,17 +35,17 @@ services:
     image: andyhecd/chapter2-licensing-service:0.0.1-SNAPSHOT
     container_name: chapter2-licensing-service
     expose:
-      - "10702"
+      - 10702
     ports:
       - 10702:10702
 
   chapter3-configserver:
     restart: on-failure
     build: ./chapter3-confsvr
-    image: andyhecd/chapter3-confsvr.jar:0.0.1-SNAPSHOT
+    image: andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT
     container_name: chapter3-confsvr
     expose:
-      - "10703"
+      - 10703
     ports:
       - 10703:10703
 
@@ -53,10 +54,17 @@ services:
     build: ./chapter3-licensing-service
     image: andyhecd/chapter3-licensing-service:0.0.1-SNAPSHOT
     container_name: chapter3-licensingservice
+    expose:
+      - 11703
     ports:
-      - "11703:11703"
-    environment:
-      WAIT_HOSTS: mysql:3306
+      - 11703:11703
     depends_on:
       - chapter3-configserver
       - microservice-mysql
+    environment:
+      - PROFILE=prod
+      - WAIT_HOSTS=microservice-mysql:3306, chapter3-configserver:10703
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    command: sh -c "/wait && /run.sh"

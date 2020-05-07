@@ -1,11 +1,17 @@
 # microservice-spring-andy
 All the practices are relevant to book Manning Spring Micro-services in Action 2017.6
+
+## Build and Run all images:
+### Step 1: At the root folder of this project, run command *mvn clean package*
+### Step 2: Continue to run *docker-compose up*
+### Step 3: Access each of service below to verify every chapter.
+
 ## Chapter 1: Welcome to the cloud, Spring
 ### Step 1: At the root folder of this project, run command *mvn clean package*
 - You will get Spring Boot project build and packaged as configuration - jar;
 - You will be able to see a new docker image generated with name andyhecd/chapter1:0.0.1-SNAPSHOT
 ### Step 2: continue to run command *docker run -p 10701:10701 andyhecd/chapter1:0.0.1-SNAPSHOT* 
-#### Step 3: Open browser and try to access service *http://localhost:10701/hello/andy/hee*
+### Step 3: Open browser and try to access service *http://localhost:10701/hello/andy/hee*
 - You should be able to see the correct response with json 
 ```
 	{
@@ -78,11 +84,11 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 ### About HOST:
 profile dev configured to connect mysql installed on the local pc, a.k.a connect to: localhost:3306
 ```
-on windows: localhost == 172.0.0.1
+	on windows: localhost == 172.0.0.1
 ```
 profile prod configured to connect mysql installed via docker image, a.k.a connect to: host.docker.internal:10700
 ```
-on windows: host.docker.internal == windows LAN IP address
+	on windows: host.docker.internal == windows LAN IP address
 ```
 ### About Profiles:
 You will be able to override default values configured in bootstrap.yml file with a -D system property.

@@ -2,4 +2,4 @@
 echo "********************************************************"
 echo "Starting chapter3 licensing service "
 echo "********************************************************"
-java -jar /usr/local/chapter3/chapter3-licensing-service.jar
+java -Dspring.profiles.active=$PROFILE -jar $JAR_FILE_PATH
