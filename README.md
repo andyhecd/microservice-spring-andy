@@ -4,6 +4,7 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 - Step 1: At the root folder of this project, run command *mvn clean package*
 - Step 2: Continue to run *docker-compose up*
 - Step 3: Access each of service below to verify every chapter.
+***
 > Chapter 1: [Welcome to the cloud, Spring](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter1)
 >> Quick verify (http://localhost:10701/hello/andy/hee)
 ***
