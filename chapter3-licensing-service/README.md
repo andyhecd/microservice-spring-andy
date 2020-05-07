@@ -23,7 +23,7 @@
 	}
 ```
 #### Step 6: Refreshing your properties using Spring Cloud configuration server
-- Use postman or other tool to send http post request to *http://localhost:11703/actuator/refresh*
+- After configuration file changed, use postman or other tool to send http post request to *http://localhost:11703/actuator/refresh*
 - Make sure spring boot started with annotation @RefreshScope
 - Make sure spring actuator feature enabled. In application.yml file:
 ```
@@ -36,6 +36,7 @@
 	      exposure:
 		include: "*"
 ```
+- Once done, the custom properties values will be up to date on host *localhost:11703*.
 #### Note: only custom configuration will be reread, which means the properties you added.
 ```
 You will get response once posting successfully
@@ -44,3 +45,4 @@ You will get response once posting successfully
     "example.property"
 ]
 ```
+#### Note: the value will be up to date only working with @ConfigurationProperties not @Component + @Value.
