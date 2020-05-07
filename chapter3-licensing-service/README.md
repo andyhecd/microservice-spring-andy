@@ -36,3 +36,4 @@
 	      exposure:
 		include: "*"
 ```
+Note: only custom configuration will be reread, which means the properties you added.
