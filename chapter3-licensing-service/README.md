@@ -36,4 +36,11 @@
 	      exposure:
 		include: "*"
 ```
-Note: only custom configuration will be reread, which means the properties you added.
+#### Note: only custom configuration will be reread, which means the properties you added.
+```
+You will get response once posting successfully
+[
+    "config.client.version",
+    "example.property"
+]
+```
