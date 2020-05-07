@@ -1,4 +1,4 @@
-example.property: "I AM IN THE DEV-changed after service started"
+example.property: "I AM IN THE DEV-changed after service started -1"
 spring.datasource.url: jdbc:mysql://localhost:3306/microservice
 spring.datasource.username: root
 spring.datasource.password: hehaiwu77
