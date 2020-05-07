@@ -1,15 +1,16 @@
 package com.sap.andyhecd.microservice.chapter3.licenses.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class ServiceConfig{
+	
+	@Bean
+    @ConfigurationProperties(prefix = "example")
+    public ExampleProps exampleProps() {
+        return new ExampleProps();
+    }
 
-  @Value("${example.property}")
-  private String exampleProperty;
-
-  public String getExampleProperty(){
-    return exampleProperty;
-  }
 }

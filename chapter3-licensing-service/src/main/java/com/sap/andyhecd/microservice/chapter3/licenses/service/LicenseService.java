@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sap.andyhecd.microservice.chapter3.licenses.config.ServiceConfig;
+import com.sap.andyhecd.microservice.chapter3.licenses.config.ExampleProps;
 import com.sap.andyhecd.microservice.chapter3.licenses.model.License;
 import com.sap.andyhecd.microservice.chapter3.licenses.repository.LicenseRepository;
 
@@ -17,11 +17,11 @@ public class LicenseService {
     private LicenseRepository licenseRepository;
 
     @Autowired
-    ServiceConfig config;
+    ExampleProps exampleProps;
 
     public License getLicense(String organizationId,String licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        return license.withComment(config.getExampleProperty());
+        return license.withComment(exampleProps.getProperty());
     }
 
     public List<License> getLicensesByOrg(String organizationId){
