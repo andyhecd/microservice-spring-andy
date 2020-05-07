@@ -1,11 +1,9 @@
 # microservice-spring-andy
 All the practices are relevant to book Manning Spring Micro-services in Action 2017.6
-
 ### Build and Run all images:
-Step 1: At the root folder of this project, run command *mvn clean package*
-Step 2: Continue to run *docker-compose up*
-Step 3: Access each of service below to verify every chapter.
-```
+- Step 1: At the root folder of this project, run command *mvn clean package*
+- Step 2: Continue to run *docker-compose up*
+- Step 3: Access each of service below to verify every chapter.
 > Chapter 1: [Welcome to the cloud, Spring](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter1)
 >> Quick verify (http://localhost:10701/hello/andy/hee)
 ***
@@ -15,7 +13,6 @@ Step 3: Access each of service below to verify every chapter.
 > Chapter 3: [Building microservices with Spring Cloud Config](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter3-licensing-service)
 >> Quick verify (http://localhost:11703/v1/organizations/442adb6e-fa58-47f3-9ca2-ed1fecdfe86c/licenses/38777179-7094-4200-9d61-edb101c6ea84)
 ***
-```
 ### About HOST:
 profile dev configured to connect mysql installed on the local pc, a.k.a connect to: localhost:3306
 ```
