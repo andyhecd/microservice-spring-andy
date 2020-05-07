@@ -22,3 +22,17 @@
 		comment: "I AM A PROD PROPERTY OVERRIDE"
 	}
 ```
+#### Step 6: Refreshing your properties using Spring Cloud configuration server
+- Use postman or other tool to send http post request to *http://localhost:11703/actuator/refresh*
+- Make sure spring boot started with annotation @RefreshScope
+- Make sure spring actuator feature enabled. In application.yml file:
+```
+	management:
+	  endpoint:
+	    shutdown:
+	      enabled: false
+	  endpoints:
+	    web:
+	      exposure:
+		include: "*"
+```
