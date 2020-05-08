@@ -43,3 +43,6 @@ Then, You will connect to mysql instance installed on your local PC.
 
 > Delete all untaged images:
 >> docker rmi $(docker images -f "dangling=true" -q)
+
+> Delete all images since another one created: (or "before")
+>> docker rmi $(docker images -f "since=mysql" -q) 
