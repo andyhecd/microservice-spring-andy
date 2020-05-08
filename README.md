@@ -40,5 +40,6 @@ Then, You will connect to mysql instance installed on your local PC.
 ### About Docker Command Line: (running with windows powershell)
 > Delete all containers:
 >> docker rm $(docker ps -a -q)
+
 > Delete all untaged images:
 >> docker rmi $(docker images -f "dangling=true" -q)
