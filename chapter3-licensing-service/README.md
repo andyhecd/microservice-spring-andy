@@ -56,10 +56,11 @@ RUN curl -q -L -C - -b "oraclelicense=accept-securebackup-cookie" -o /tmp/jce_po
 ```
 - Disable the server-side decryption of properties in Spring Cloud Config with configuration:
 ```
-	spring.cloud.config.server.encrypt.enabled: false
+spring.cloud.config.server.encrypt.enabled: false
 ```
 - Make sure both server and clint use the same enviromenrt variable ENCRYPT_KEY
 - Make clint project uses spring-security-rsa JARs
 - HTTP Post the content you wanna encrypt to configuration server *http://localhost:10703/encrypt*
 - Put the encrypted content with leading constant string **"{cipher}"** to the configuration file
+- Try to access configuration file via *http://localhost:10703/licensingservice/prod*, you will see spring.datasource.password is encrypted.
  
