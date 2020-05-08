@@ -48,6 +48,8 @@ services:
       - 10703
     ports:
       - 10703:10703
+    environment:
+      - ENCRYPT_KEY=IMSYMMETRIC
 
   chapter3-licensingservice:
     restart: on-failure
@@ -67,4 +69,5 @@ services:
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=30
       - WAIT_HOST_CONNECT_TIMEOUT=30
+      - ENCRYPT_KEY=IMSYMMETRIC
     command: sh -c "/wait && /run.sh"

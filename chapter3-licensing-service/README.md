@@ -46,3 +46,20 @@ You will get response once posting successfully
 ]
 ```
 #### Note: the value will be up to date only working with @ConfigurationProperties rather than @Component + @Value.
+#### Step 7: Protecting sensitive configuration inforamtion
+- Make sure your configuration server running jvm with jce. Here is sample command line for installing jce with docker file.
+```
+# Add Java Cryptography Extension - JCE -------------------
+RUN curl -q -L -C - -b "oraclelicense=accept-securebackup-cookie" -o /tmp/jce_policy-8.zip -O http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip \
+    && unzip -oj -d /usr/lib/jvm/java-1.8-openjdk/jre/lib/security /tmp/jce_policy-8.zip \*/\*.jar \
+    && rm /tmp/jce_policy-8.zip
+```
+- Disable the server-side decryption of properties in Spring Cloud Config with configuration:
+```
+	spring.cloud.config.server.encrypt.enabled: false
+```
+- Make sure both server and clint use the same enviromenrt variable ENCRYPT_KEY
+- Make clint project uses spring-security-rsa JARs
+- HTTP Post the content you wanna encrypt to configuration server *http://localhost:10703/encrypt*
+- Put the encrypted content with leading constant string **"{cipher}"** to the configuration file
+ 

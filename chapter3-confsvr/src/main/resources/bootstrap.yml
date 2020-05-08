@@ -4,8 +4,7 @@ spring:
   cloud:
     config:
       server:
-        encrypt:
-          key: mys3cr3t
+        encrypt.enabled: false
         git:
           uri: https://github.com/andyhecd/microservice-spring-andy
           #uri: https://github.com/carnellj/config-repo/

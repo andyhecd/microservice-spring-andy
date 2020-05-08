@@ -15,4 +15,5 @@ ADD run.sh run.sh
 RUN chmod +x run.sh
 
 ENV JAR_FILE_PATH /usr/local/chapter3/${JAR_FILE}
+ENV ENCRYPT_KEY IMSYMMETRIC
 CMD ./run.sh
