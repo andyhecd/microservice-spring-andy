@@ -1,7 +1,7 @@
 example.property: "I AM IN THE DEV-changed after service started - 2"
 spring.datasource.url: jdbc:mysql://localhost:3306/microservice
 spring.datasource.username: root
-spring.datasource.password: hehaiwu77
+spring.datasource.password: "{cipher}a4a5316fdcf2b5ae36f2a72bbddcf7518985f1666766e1b15b8be203d058cab3"
 lombok.equalsAndHashCode.callSuper: call
 spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
