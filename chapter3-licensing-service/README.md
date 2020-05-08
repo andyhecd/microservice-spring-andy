@@ -45,4 +45,4 @@ You will get response once posting successfully
     "example.property"
 ]
 ```
-#### Note: the value will be up to date only working with @ConfigurationProperties not @Component + @Value.
+#### Note: the value will be up to date only working with @ConfigurationProperties rather than @Component + @Value.
