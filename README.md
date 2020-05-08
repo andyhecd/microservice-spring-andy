@@ -48,4 +48,4 @@ Then, You will connect to mysql instance installed on your local PC.
 >> docker rmi $(docker images -f "since=mysql" -q) 
 
 > Delete all images with reference
->> docker rmi $(docker images -f "reference=andyhecd*:*SNAPSHOT" -q) 
+>> docker rmi $(docker images -f "reference=andyhecd/*:*SNAPSHOT" -q) 
