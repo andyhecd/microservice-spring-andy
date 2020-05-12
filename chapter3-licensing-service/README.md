@@ -1,4 +1,10 @@
 # Chapter 3: Building microservices with Spring Cloud Config
+Chapter 3 introduces the Spring Cloud Config service and how you can use it managed the configuration of your microservices. By the time you are done reading this chapter you will have built and/or deployed:
+1. A Spring Cloud Config server that is deployed as Docker container and can manage a services configuration information using a file system or GitHub-based repository.
+2. A organization service that will manage organization data used within EagleEye.
+3. A licensing service that will manage licensing data used within EagleEye.
+4. A Postgres SQL database used to hold the data for these two services.
+## Running the services for Chapter 3
 #### Step 1: At the root folder of this project, run command *mvn clean package*
 - You will get Spring Boot project build and packaged as configuration - jar;
 - You will be able to see a new docker image generated with name andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT

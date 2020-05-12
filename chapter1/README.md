@@ -1,4 +1,6 @@
-# Chapter 1: Welcome to the cloud, Spring
+# Chapter 1: Welcome to the Spring Cloud
+Chapter 1 is an introduction to the book. The only code used in this Chapter is a simple, "helloworld" style service that demonstrates how to build a simple microservice using Spring Boot. 
+## Running the services for Chapter 1
 #### Step 1: At the root folder of this project, run command *mvn clean package*
 - You will get Spring Boot project build and packaged as configuration - jar;
 - You will be able to see a new docker image generated with name andyhecd/chapter1:0.0.1-SNAPSHOT

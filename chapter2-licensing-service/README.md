@@ -1,4 +1,6 @@
 # Chapter 2: Building microservices with Spring Boot
+Chapter 2 focuses on what exactly is a microservice and goes into more detail on how to build a microservice using Spring Boot. This chapter in this code focuses on building a single service called the licensing service. After you have compiled and started the code you should have a service called the licensing service up and running.
+## Running the services for Chapter 2
 #### Step 1: At the root folder of this project, run command *mvn clean package*
 - You will get Spring Boot project build and packaged as configuration - jar;
 - You will be able to see a new docker images generated with name andyhecd/chapter2-licensing-service:0.0.1-SNAPSHOT
