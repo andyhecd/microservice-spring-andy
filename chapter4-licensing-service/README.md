@@ -117,12 +117,16 @@ eureka:
     preferIpAddress: true #Register the IP of the service rather than the server name
   client:
     registerWithEureka: true #Register the service with Eureka
-    fetchRegistry: true # Pull down a local copy of the registry
+    fetchRegistry: true #Pull down a local copy of the registry
     serviceUrl:
         defaultZone: http://host.docker.internal:10704/eureka/ #Location of the Eureka Service
 ```
-##### Step 3: Client side, using service discovery to look up a service
+##### Step 3: Client side, using different client of service discovery to look up a service
 ###### Option 1: Spring Discovery client
+- Enable discovery client on spring boot application with annotation @EnableDiscoveryClient, which is the trigger for Spring Cloud to enable the application to use the DiscoveryClient and Ribbon libraries.
+- Then in your code, you will be able to autowire instance of DiscoveryClient(org.springframework.cloud.client.discovery.DiscoveryClient), which has ablity to get service instance by service logic name, a.k.a. application id.
+- The service instance retrived has service uri attribute ready for using
+- Finally, use a standerd spring REST template class to call the service via uri
 ###### Option 2: Spring Discovery client enabled RestTemplate
 ###### Option 3: Netflix Feign client
 
