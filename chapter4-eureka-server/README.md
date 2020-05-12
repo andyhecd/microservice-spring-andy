@@ -1,0 +1,1 @@
+Refer to [Building microservices with Spring Cloud Service Discovery](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter4-licensing-service)

@@ -39,6 +39,9 @@
 		<module>chapter2-licensing-service</module>
 		<module>chapter3-confsvr</module>
 		<module>chapter3-licensing-service</module>
+		<module>chapter4-eureka-server</module>
+		<module>chapter4-organization-service</module>
+		<module>chapter4-licensing-service</module>
 	</modules>
 
 	<repositories>

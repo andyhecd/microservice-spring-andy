@@ -1,0 +1,10 @@
+server:
+  port: 11704
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://host.docker.internal:10704/eureka/

@@ -51,6 +51,16 @@ services:
     environment:
       - ENCRYPT_KEY=IMSYMMETRIC
 
+  chapter4-eurekaserver:
+    restart: on-failure
+    build: ./chapter4-eureka-server
+    image: andyhecd/chapter4-eureka-server:0.0.1-SNAPSHOT
+    container_name: chapter4-eureka-server
+    expose:
+      - 10704
+    ports:
+      - 10704:10704
+
   chapter3-licensingservice:
     restart: on-failure
     build: ./chapter3-licensing-service
@@ -66,6 +76,50 @@ services:
     environment:
       - PROFILE=prod
       - WAIT_HOSTS=microservice-mysql:3306, chapter3-configserver:10703
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+      - ENCRYPT_KEY=IMSYMMETRIC
+    command: sh -c "/wait && /run.sh"
+
+  chapter4-organization-service:
+    restart: on-failure
+    build: ./chapter4-organization-service
+    image: andyhecd/chapter4-organization-service:0.0.1-SNAPSHOT
+    container_name: chapter4-organization-service
+    expose:
+      - 11704
+    ports:
+      - 11704:11704
+    depends_on:
+      - chapter3-configserver
+      - microservice-mysql
+      - chapter4-eurekaserver
+    environment:
+      - PROFILE=prod
+      - WAIT_HOSTS=microservice-mysql:3306, chapter3-configserver:10703, chapter4-eurekaserver:10704
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+      - ENCRYPT_KEY=IMSYMMETRIC
+    command: sh -c "/wait && /run.sh"
+
+  chapter4-licensing-service:
+    restart: on-failure
+    build: ./chapter4-licensing-service
+    image: andyhecd/chapter4-licensing-service:0.0.1-SNAPSHOT
+    container_name: chapter4-licensing-service
+    expose:
+      - 12704
+    ports:
+      - 12704:12704
+    depends_on:
+      - chapter3-configserver
+      - microservice-mysql
+      - chapter4-organization-service
+    environment:
+      - PROFILE=prod
+      - WAIT_HOSTS=microservice-mysql:3306, chapter3-configserver:10703, chapter4-organization-service:11704, chapter4-eurekaserver:10704
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=30
       - WAIT_HOST_CONNECT_TIMEOUT=30
