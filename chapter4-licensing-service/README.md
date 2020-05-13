@@ -9,8 +9,18 @@ By the time you are done reading this chapter you will have built and/or deploye
 4. A licensing service that will manage licensing data used within EagleEye.
 5. A Postgres SQL database used to hold the data for these two services.
 
-`Note: the config server will continue to use project chapter3-confsvr`
+## Chapter 4 Summary
+- The service discovery pattern is used to abstract away the physical location ofservices.
+- A service discovery engine such as Eureka can seamlessly add and remove service instances from an environment without the service clients being impacted.
+- Client-side load balancing can provide an extra level of performance and resiliency by caching the physical location of a service on the client making the service call.
+- Eureka is a Netflix project that when used with Spring Cloud, is easy to set up and configure.
+- You used three different mechanisms in Spring Cloud, Netflix Eureka, and Netflix Ribbon to invoke a service. These mechanisms included
+		– Using a Spring Cloud service DiscoveryClient
+		– Using Spring Cloud and Ribbon-backed RestTemplate
+		– Using Spring Cloud and Netflix’s Feign client
+
 ## Running the services for Chapter 4
+`Note: the config server will continue to use project chapter3-confsvr`
 #### Step 1: At the root folder of this project, run command *mvn clean package*
 - You will get Spring Boot project build and packaged as configuration - jar;
 - You will be able to see three new docker images generated with prefix *andyhecd/chapter4-*, including one discovery server and two clients
@@ -125,9 +135,55 @@ eureka:
 ###### Option 1: Spring Discovery client
 - Enable discovery client on spring boot application with annotation @EnableDiscoveryClient, which is the trigger for Spring Cloud to enable the application to use the DiscoveryClient and Ribbon libraries.
 - Then in your code, you will be able to autowire instance of DiscoveryClient(org.springframework.cloud.client.discovery.DiscoveryClient), which has ablity to get service instance by service logic name, a.k.a. application id.
-- The service instance retrived has service uri attribute ready for using
-- Finally, use a standerd spring REST template class to call the service via uri
+- The ServiceInstance class is used to hold information about a specific instance of a service including its hostname, port and URI
+- Finally, use a standerd spring REST template class to call the service via uri  
+You will be able to use `http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/t9876f8c-c338-4abc-zf6a-ttt1/discovery/` to test this implementation.
 ###### Option 2: Spring Discovery client enabled RestTemplate
-###### Option 3: Netflix Feign client
+- Carry out Load Balanced RestTemplate Bean within Spring Boot Application,
+```java
+	@LoadBalanced //It tells Spring Cloud to create a Ribbon backed RestTemplate class
+	@Bean
+	public RestTemplate getRestTemplate(){
+		return new RestTemplate();
+	}
+```
+- Use Eureka service ID of the service you want to call to build the target URL for Ribbon-backed RestTemplate instance which is autowired in you service class
+```java
+	@Component
+	public class OrganizationRestTemplateClient {
+		@Autowired
+		RestTemplate restTemplate;
+
+		public Organization getOrganization(String organizationId){
+			ResponseEntity<Organization> restExchange =
+					restTemplate.exchange(
+							"http://organizationservice/v1/organizations/{organizationId}",
+							HttpMethod.GET,
+							null, Organization.class, organizationId);
+
+			return restExchange.getBody();
+		}
+	}
+```
+You will be able to use `http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/t9876f8c-c338-4abc-zf6a-ttt1/rest/` to test this implementation.
+###### Option 3: Netflix Feign client `Andy Awared`
+An alternative to the Spring Ribbon-enabled RestTemplate class is Netflix’s Feign client library. The Feign library takes a different approach to calling a REST service by having the developer first define a Java interface and then annotating that interface with Spring Cloud annotations to map what Eureka-based service Ribbon will invoke. The Spring Cloud framework will dynamically generate a proxy class that will be used to invoke the targeted REST service. There’s no code being written for calling the service other than an interface definition.
+- Enable Feign client on spring boot application with annotation @EnableFeignClients. 
+- Define Feign client interface. How you define the getOrganization() method looks exactly like how you would expose an endpoint in a Spring Controller class
+```java
+	@FeignClient("organizationservice")
+	public interface OrganizationFeignClient {
+		@RequestMapping(
+				method= RequestMethod.GET,
+				value="/v1/organizations/{organizationId}",
+				consumes="application/json")
+		Organization getOrganization(@PathVariable("organizationId") String organizationId);
+	}
+```
+- Autowire the feign client you defined and use it
+```java
+	organization = organizationFeignClient.getOrganization(organizationId);
+```
+
 
  
