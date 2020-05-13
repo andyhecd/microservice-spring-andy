@@ -4,6 +4,11 @@ Chapter 3 introduces the Spring Cloud Config service and how you can use it mana
 2. A organization service that will manage organization data used within EagleEye.
 3. A licensing service that will manage licensing data used within EagleEye.
 4. A Postgres SQL database used to hold the data for these two services.
+## Chapter 3 Summary
++ Spring Cloud configuration server allows you to set up application properties with environment specific values.
++ Spring uses Spring profiles to launch a service to determine what environment properties are to be retrieved from the Spring Cloud Config service.
++ Spring Cloud configuration service can use a file-based or Git-based application configuration repository to store application properties.
++ Spring Cloud configuration service allows you to encrypt sensitive property files using symmetric and asymmetric encryption.
 ## Running the services for Chapter 3
 #### Step 1: At the root folder of this project, run command *mvn clean package*
 - You will get Spring Boot project build and packaged as configuration - jar;
