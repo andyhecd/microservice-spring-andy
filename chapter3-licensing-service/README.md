@@ -22,7 +22,7 @@ Chapter 3 introduces the Spring Cloud Config service and how you can use it mana
 #### Step 4: continue to run command *docker run -dp 11703:11703 andyhecd/chapter3-licensing-service:0.0.1-SNAPSHOT* 
 #### Step 5: Open browser and try to access service *http://localhost:11703/v1/organizations/442adb6e-fa58-47f3-9ca2-ed1fecdfe86c/licenses/38777179-7094-4200-9d61-edb101c6ea84*
 - You should be able to see the correct response with json 
-```
+```json
 	{
 		licenseId: "38777179-7094-4200-9d61-edb101c6ea84",
 		organizationId: "442adb6e-fa58-47f3-9ca2-ed1fecdfe86c",git 
@@ -37,7 +37,7 @@ Chapter 3 introduces the Spring Cloud Config service and how you can use it mana
 - After configuration file changed, use postman or other tool to send http post request to *http://localhost:11703/actuator/refresh*
 - Make sure spring boot started with annotation @RefreshScope
 - Make sure spring actuator feature enabled. In application.yml file:
-```
+```yml
 	management:
 	  endpoint:
 	    shutdown:
@@ -59,7 +59,7 @@ You will get response once posting successfully
 #### Note: the value will be up to date only working with @ConfigurationProperties rather than @Component + @Value.
 #### Step 7: Protecting sensitive configuration inforamtion
 - Make sure your configuration server running jvm with jce. Here is sample command line for installing jce with docker file.
-```
+```bash
 # Add Java Cryptography Extension - JCE -------------------
 RUN curl -q -L -C - -b "oraclelicense=accept-securebackup-cookie" -o /tmp/jce_policy-8.zip -O http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip \
     && unzip -oj -d /usr/lib/jvm/java-1.8-openjdk/jre/lib/security /tmp/jce_policy-8.zip \*/\*.jar \
