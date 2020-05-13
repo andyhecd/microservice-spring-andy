@@ -15,9 +15,9 @@ By the time you are done reading this chapter you will have built and/or deploye
 - Client-side load balancing can provide an extra level of performance and resiliency by caching the physical location of a service on the client making the service call.
 - Eureka is a Netflix project that when used with Spring Cloud, is easy to set up and configure.
 - You used three different mechanisms in Spring Cloud, Netflix Eureka, and Netflix Ribbon to invoke a service. These mechanisms included
-		– Using a Spring Cloud service DiscoveryClient
-		– Using Spring Cloud and Ribbon-backed RestTemplate
-		– Using Spring Cloud and Netflix’s Feign client
+   – Using a Spring Cloud service DiscoveryClient
+   – Using Spring Cloud and Ribbon-backed RestTemplate
+   – Using Spring Cloud and Netflix’s Feign client
 
 ## Running the services for Chapter 4
 `Note: the config server will continue to use project chapter3-confsvr`
