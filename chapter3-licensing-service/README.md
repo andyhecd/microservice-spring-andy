@@ -25,7 +25,7 @@ Chapter 3 introduces the Spring Cloud Config service and how you can use it mana
 ```json
 	{
 		licenseId: "38777179-7094-4200-9d61-edb101c6ea84",
-		organizationId: "442adb6e-fa58-47f3-9ca2-ed1fecdfe86c",git 
+		organizationId: "442adb6e-fa58-47f3-9ca2-ed1fecdfe86c",
 		productName: "HR-PowerSuite",
 		licenseType: "user",
 		licenseMax: 100,
