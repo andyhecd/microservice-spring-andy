@@ -9,7 +9,7 @@ By the time you are done reading this chapter you will have built and/or deploye
 4. A licensing service that will manage licensing data used within EagleEye.
 5. A Postgres SQL database used to hold the data for these two services.
 
-Note: the config server will continue to use project chapter3-confsvr
+`Note: the config server will continue to use project chapter3-confsvr`
 ## Running the services for Chapter 4
 #### Step 1: At the root folder of this project, run command *mvn clean package*
 - You will get Spring Boot project build and packaged as configuration - jar;
