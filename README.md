@@ -31,12 +31,12 @@ You will be able to override default values configured in bootstrap.yml file wit
 For example:
 - You start mysql and configuration server via docker images following steps mentioned above;
 - If you start licensing service by running jar file directly with command like:
-```
+```bash
 	java -Dspring.profiles.active=prod -jar chapter3-licensing-service.jar
 ```
 Thus, You will connect to mysql instance started via docker image.
 - If like this:
-```
+```bash
 	java -Dspring.profiles.active=dev -jar chapter3-licensing-service.jar
 ```
 Then, You will connect to mysql instance installed on your local PC.
