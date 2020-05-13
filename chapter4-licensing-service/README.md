@@ -76,6 +76,8 @@ Open browser and try to access service *http://localhost:12704/v1/organizations/
 		}
 	]
 ```
+#### Step 7: Stop eureka server, you can still get license with organization information successfully. Because the clint-side load balancer cached the pyhsical location of service instances.
+
 ## Recap: Spring Cloud Supported clients of Service Discovery 
 #### Service discovery in action using Spring and Netflix Eureka
 ##### Step 1: Server side, building your Spring Eureka Server
@@ -184,6 +186,5 @@ An alternative to the Spring Ribbon-enabled RestTemplate class is Netflix’s Fe
 ```java
 	organization = organizationFeignClient.getOrganization(organizationId);
 ```
-
 
  
