@@ -34,7 +34,7 @@ By the time you are done reading this chapter you will have built and/or deploye
 #### Step 5: continue to run command *docker run -dp 11704:11704 andyhecd/chapter4-organization-service:0.0.1-SNAPSHOT* 
 Open browser and try to access service *http://localhost:11704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/*
 - You should be able to see the correct response with json 
-```
+```json
 	{
 		id: "e254f8c-c442-4ebe-a82a-e2fc1d1ff78a",
 		name: "customer-crm-co",
@@ -46,7 +46,7 @@ Open browser and try to access service *http://localhost:11704/v1/organizations/
 #### Step 6: continue to run command *docker run -dp 12704:12704 andyhecd/chapter4-licensing-service:0.0.1-SNAPSHOT* 
 Open browser and try to access service *http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/*
 - You should be able to see the correct response with json 
-```
+```json
 	[
 		{
 			licenseId: "f3831f8c-c338-4ebe-a82a-e2fc1d1ff78a",
@@ -80,14 +80,14 @@ Open browser and try to access service *http://localhost:12704/v1/organizations/
 #### Service discovery in action using Spring and Netflix Eureka
 ##### Step 1: Server side, building your Spring Eureka Server
 - Service Discovery Server dependency:
-```
+```maven
 	<dependency>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 	</dependency>
 ```
 - Service Discovery Server configuration, application.yml
-```
+```yml
 server:
   port: 10704
 
@@ -109,14 +109,14 @@ eureka:
 - Enable Eureka server on Spring Boot Application with annotation @nableEurekaServer
 ##### Step 2: Client side, registering services with Spring Eureka
 - Service Discovery Client dependency:
-```
+```maven
 	<dependency>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 	</dependency>
 ```
 - Service Discovery Client configuration, application.yml:
-```
+```yml
 spring:
   application:
     name: organizationservice #Logical name/application ID of the service that will be registered with Eureka, will represent a group service instance(normally, this property should be configured in bootstrap.yml)
