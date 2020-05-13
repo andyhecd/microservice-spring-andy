@@ -43,6 +43,9 @@ Open browser and try to access service *http://localhost:11704/v1/organizations/
 		contactPhone: "823-555-1212"
 	}
 ```
+- If you change the port and start another organization service container, then:
+   - access *http://localhost:10704/eureka/apps/organizationservice*, you will find out two service instances;
+   - or access *http://localhost:10704/*, you will see two avaliable zones for `organizationservice` group.
 #### Step 6: continue to run command *docker run -dp 12704:12704 andyhecd/chapter4-licensing-service:0.0.1-SNAPSHOT* 
 Open browser and try to access service *http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/*
 - You should be able to see the correct response with json 
