@@ -1,0 +1,15 @@
+example.property: "I AM IN THE DEFAULT"
+spring.datasource.url: jdbc:mysql://docker-mysql:3306/docker-andy
+spring.datasource.username: root
+spring.datasource.password: root
+lombok.equalsAndHashCode.callSuper: call
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.datasource.testWhileIdle: true
+spring.datasource.validationQuery: SELECT 1
+spring.jpa.show-sql: true
+spring.jpa.hibernate.ddl-auto: update
+spring.jpa.hibernate.naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+redis.server: "redis"
+redis.port: "6379"
+signing.key: "345345fsdfsf5345"

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        encrypt.enabled: false
+        git:
+          uri: https://github.com/andyhecd/microservice-spring-andy
+          #uri: https://github.com/carnellj/config-repo/
+          default-label: master #配置文件分支
+          searchPaths: config-server/config/licensingservice,config-server/config/organizationservice
+          username: andyhecd
+          password: Xiao0001
+

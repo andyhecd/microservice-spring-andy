@@ -35,13 +35,10 @@
 	</dependencyManagement>
 
 	<modules>
-		<module>chapter1</module>
-		<module>chapter2-licensing-service</module>
-		<module>chapter3-confsvr</module>
-		<module>chapter3-licensing-service</module>
-		<module>chapter4-eureka-server</module>
-		<module>chapter4-organization-service</module>
-		<module>chapter4-licensing-service</module>
+		<module>config-server</module>
+		<module>eureka-server</module>
+		<module>licensing-service</module>
+		<module>organization-service</module>
 	</modules>
 
 	<repositories>

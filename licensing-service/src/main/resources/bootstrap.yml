@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: prod
+---
+spring:
+  profiles: prod
+  application:
+    name: licensingservice
+  cloud:
+     config:
+       uri: http://host.docker.internal:10001
+       label: master
+       profile: prod
+---
+spring:
+  profiles: dev
+  application:
+    name: licensingservice
+  cloud:
+     config:
+       uri: http://localhost:10001
+       label: master
+       profile: dev

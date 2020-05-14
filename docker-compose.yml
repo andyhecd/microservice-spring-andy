@@ -12,107 +12,67 @@ services:
     ports:
       - 10700:3306
 
-  chapter1:
+  config-server:
     restart: on-failure
-    build: ./chapter1
-    image: andyhecd/chapter1:0.0.1-SNAPSHOT
-    container_name: chapter1
+    build: ./config-server
+    image: andyhecd/config-server:0.0.1-SNAPSHOT
+    container_name: config-server
     expose:
-      - 10701
+      - 10001
     ports:
-      - 10701:10701
-
-  chapter2:
-    restart: on-failure
-    build: ./chapter2-licensing-service
-    image: andyhecd/chapter2-licensing-service:0.0.1-SNAPSHOT
-    container_name: chapter2-licensing-service
-    expose:
-      - 10702
-    ports:
-      - 10702:10702
-
-  chapter3-configserver:
-    restart: on-failure
-    build: ./chapter3-confsvr
-    image: andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT
-    container_name: chapter3-confsvr
-    expose:
-      - 10703
-    ports:
-      - 10703:10703
+      - 10001:10001
     environment:
       - ENCRYPT_KEY=IMSYMMETRIC
 
-  chapter4-eurekaserver:
+  eureka-server:
     restart: on-failure
-    build: ./chapter4-eureka-server
-    image: andyhecd/chapter4-eureka-server:0.0.1-SNAPSHOT
-    container_name: chapter4-eureka-server
+    build: ./eureka-server
+    image: andyhecd/eureka-server:0.0.1-SNAPSHOT
+    container_name: eureka-server
     expose:
-      - 10704
+      - 10002
     ports:
-      - 10704:10704
+      - 10002:10002
 
-  chapter3-licensingservice:
+  organization-service:
     restart: on-failure
-    build: ./chapter3-licensing-service
-    image: andyhecd/chapter3-licensing-service:0.0.1-SNAPSHOT
-    container_name: chapter3-licensingservice
+    build: ./organization-service
+    image: andyhecd/organization-service:0.0.1-SNAPSHOT
+    container_name: organization-service
     expose:
-      - 11703
+      - 10004
     ports:
-      - 11703:11703
+      - 10004:10004
     depends_on:
-      - chapter3-configserver
+      - config-server
       - microservice-mysql
+      - eureka-server
     environment:
       - PROFILE=prod
-      - WAIT_HOSTS=microservice-mysql:3306, chapter3-configserver:10703
+      - WAIT_HOSTS=microservice-mysql:3306, config-server:10001, eureka-server:10002
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=30
       - WAIT_HOST_CONNECT_TIMEOUT=30
       - ENCRYPT_KEY=IMSYMMETRIC
     command: sh -c "/wait && /run.sh"
 
-  chapter4-organization-service:
+  licensing-service:
     restart: on-failure
-    build: ./chapter4-organization-service
-    image: andyhecd/chapter4-organization-service:0.0.1-SNAPSHOT
-    container_name: chapter4-organization-service
+    build: ./licensing-service
+    image: andyhecd/licensing-service:0.0.1-SNAPSHOT
+    container_name: licensing-service
     expose:
-      - 11704
+      - 10003
     ports:
-      - 11704:11704
+      - 10003:10003
     depends_on:
-      - chapter3-configserver
+      - - config-server
       - microservice-mysql
-      - chapter4-eurekaserver
+      - eureka-server
+      - organization-service
     environment:
       - PROFILE=prod
-      - WAIT_HOSTS=microservice-mysql:3306, chapter3-configserver:10703, chapter4-eurekaserver:10704
-      - WAIT_HOSTS_TIMEOUT=300
-      - WAIT_SLEEP_INTERVAL=30
-      - WAIT_HOST_CONNECT_TIMEOUT=30
-      - ENCRYPT_KEY=IMSYMMETRIC
-    command: sh -c "/wait && /run.sh"
-
-  chapter4-licensing-service:
-    restart: on-failure
-    build: ./chapter4-licensing-service
-    image: andyhecd/chapter4-licensing-service:0.0.1-SNAPSHOT
-    container_name: chapter4-licensing-service
-    expose:
-      - 12704
-    ports:
-      - 12704:12704
-    depends_on:
-      - chapter3-configserver
-      - microservice-mysql
-      - chapter4-organization-service
-    environment:
-      - PROFILE=prod
-      - WAIT_HOSTS=microservice-mysql:3306, chapter3-configserver:10703, chapter4-organization-service:11704, chapter4-eurekaserver:10704
+      - WAIT_HOSTS=microservice-mysql:3306, config-server:10001, eureka-server:10002, organization-service:10004
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=30
       - WAIT_HOST_CONNECT_TIMEOUT=30

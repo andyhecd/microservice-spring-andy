@@ -1,0 +1,25 @@
+server:
+  port: 10003
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://host.docker.internal:10002/eureka/
+
+
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#will be overwrote
+example:
+  property: NaN
