@@ -9,15 +9,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-    volumes:
-      - ./sql:/docker-entrypoint-initdb.d
     ports:
       - 10700:3306
-    healthcheck:
-      test: "/usr/bin/mysql --user=root --password=root--execute \"SHOW DATABASES;\""
-      interval: 2s
-      timeout: 300s
-      retries: 10
 
   chapter1:
     restart: on-failure
