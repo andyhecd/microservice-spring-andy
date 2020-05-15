@@ -22,7 +22,6 @@ By the time you are done reading this chapter you will have built and/or deploye
 ## Verify the services for Chapter 4
 #### Access *http://localhost:10002/*, and displaying Eureka server status information as expected
 #### Access service *http://localhost:10004/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/*
-- You should be able to see the correct response with json 
 ```json
 	{
 		id: "e254f8c-c442-4ebe-a82a-e2fc1d1ff78a",
