@@ -5,7 +5,7 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 - Step 2: Continue to run *docker-compose up*
 - Step 3: Access each of service below to verify every chapter.
 ***
-> Chapter 1: [Welcome to the Spring Cloud](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter1)
+> Chapter 1: [Welcome to the Spring Cloud](./chapter1.md)
 ***
 > Chapter 2: [Building microservices with Spring Boot](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter2-licensing-service)
 >> Quick verify (http://localhost:10702/v1/organizations/sapibsocd/licenses/csccn_andy)
