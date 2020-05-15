@@ -32,6 +32,7 @@ By the time you are done reading this chapter you will have built and/or deploye
 	}
 ```
 - If you change the port and start another organization service container, then:
+   - use *docker run -dp 10014:10004 andyhecd/organization-service:0.0.1-SNAPSHOT*
    - access *http://localhost:10002/eureka/apps/organizationservice*, you will find out two service instances;
    - or access *http://localhost:10002/*, you will see two avaliable zones for `organizationservice` group.
 #### Access service *http://localhost:10003/v1/organizations/442adb6e-fa58-47f3-9ca2-ed1fecdfe86c/licenses/*
