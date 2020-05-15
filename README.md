@@ -7,14 +7,13 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 ***
 > Chapter 1: [Welcome to the Spring Cloud](./chapter1.md)
 ***
-> Chapter 2: [Building microservices with Spring Boot](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter2-licensing-service)
->> Quick verify (http://localhost:10702/v1/organizations/sapibsocd/licenses/csccn_andy)
+> Chapter 2: [Building microservices with Spring Boot](./chapter2.md)
 ***
-> Chapter 3: [Building microservices with Spring Cloud Config](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter3-licensing-service)
->> Quick verify (http://localhost:11703/v1/organizations/442adb6e-fa58-47f3-9ca2-ed1fecdfe86c/licenses/38777179-7094-4200-9d61-edb101c6ea84)
+> Chapter 3: [Building microservices with Spring Cloud Config](./chapter3.md)
+>> Quick verify (http://localhost:10003/v1/organizations/442adb6e-fa58-47f3-9ca2-ed1fecdfe86c/licenses/38777179-7094-4200-9d61-edb101c6ea84)
 ***
-> Chapter 4: [Building microservices with Spring Cloud Service Discovery](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter4-licensing-service)
->> Quick verify (http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/)
+> Chapter 4: [Building microservices with Spring Cloud Service Discovery](./chapter4.md)
+>> Quick verify (http://localhost:10003/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/)
 ***
 ### About HOST:
 profile dev configured to connect mysql installed on the local pc, a.k.a connect to: localhost:3306
