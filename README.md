@@ -6,7 +6,6 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 - Step 3: Access each of service below to verify every chapter.
 ***
 > Chapter 1: [Welcome to the Spring Cloud](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter1)
->> Quick verify (http://localhost:10701/hello/andy/hee)
 ***
 > Chapter 2: [Building microservices with Spring Boot](https://github.com/andyhecd/microservice-spring-andy/tree/master/chapter2-licensing-service)
 >> Quick verify (http://localhost:10702/v1/organizations/sapibsocd/licenses/csccn_andy)
@@ -52,3 +51,7 @@ Then, You will connect to mysql instance installed on your local PC.
 
 > Delete all images with reference
 >> docker rmi $(docker images -f "reference=andyhecd/*:*SNAPSHOT" -q) 
+
+> Run mysql image separately
+>> docker run --name docker-mysql -dp 10700:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=microservice mysql
+>> docker exec -it docker-mysql bash #Get into mysql command line

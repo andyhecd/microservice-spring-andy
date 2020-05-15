@@ -19,20 +19,9 @@ By the time you are done reading this chapter you will have built and/or deploye
    + Using Spring Cloud and Ribbon-backed RestTemplate
    + Using Spring Cloud and Netflix’s Feign client
 
-## Running the services for Chapter 4
-`Note: the config server will continue to use project chapter3-confsvr`
-#### Step 1: At the root folder of this project, run command *mvn clean package*
-- You will get Spring Boot project build and packaged as configuration - jar;
-- You will be able to see three new docker images generated with prefix *andyhecd/chapter4-*, including one discovery server and two clients
-#### Step 2: continue to run command *docker run --name docker-mysql -dp 10700:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=microservice mysql* 
-- You will be able to use command *docker exec -it docker-mysql bash* and then *mysql -u root -p root* to login mysql command line;
-- Continue to run mysql command checking if database **microservice** exists.
-#### Step 3: continue to run command *docker run -dp 10703:10703 andyhecd/chapter3-confsvr:0.0.1-SNAPSHOT*
-- Try to access http://localhost:10703/licensingservice/prod, and prodction configuration responsed as expected 
-#### Step 4: continue to run command *docker run -dp 10704:10704 andyhecd/chapter4-eureka-server:0.0.1-SNAPSHOT* 
-- Try to access *http://localhost:10704/*, and displaying Eureka server status information as expected
-#### Step 5: continue to run command *docker run -dp 11704:11704 andyhecd/chapter4-organization-service:0.0.1-SNAPSHOT* 
-Open browser and try to access service *http://localhost:11704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/*
+## Verify the services for Chapter 4
+#### Access *http://localhost:10002/*, and displaying Eureka server status information as expected
+#### Access service *http://localhost:10004/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/*
 - You should be able to see the correct response with json 
 ```json
 	{
@@ -44,42 +33,40 @@ Open browser and try to access service *http://localhost:11704/v1/organizations/
 	}
 ```
 - If you change the port and start another organization service container, then:
-   - access *http://localhost:10704/eureka/apps/organizationservice*, you will find out two service instances;
-   - or access *http://localhost:10704/*, you will see two avaliable zones for `organizationservice` group.
-#### Step 6: continue to run command *docker run -dp 12704:12704 andyhecd/chapter4-licensing-service:0.0.1-SNAPSHOT* 
-Open browser and try to access service *http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/*
-- You should be able to see the correct response with json 
+   - access *http://localhost:10002/eureka/apps/organizationservice*, you will find out two service instances;
+   - or access *http://localhost:10002/*, you will see two avaliable zones for `organizationservice` group.
+#### Access service *http://localhost:10003/v1/organizations/442adb6e-fa58-47f3-9ca2-ed1fecdfe86c/licenses/*
 ```json
 	[
 		{
-			licenseId: "f3831f8c-c338-4ebe-a82a-e2fc1d1ff78a",
-			organizationId: "e254f8c-c442-4ebe-a82a-e2fc1d1ff78a",
-			organizationName: "customer-crm-co",
-			contactName: "Mark Balster",
-			contactPhone: "823-555-1212",
-			contactEmail: "mark.balster@custcrmco.com",
-			productName: "CustomerPro",
-			licenseType: "user",
-			licenseMax: 100,
-			licenseAllocated: 5,
+			licenseId: "08dbe05-606e-4dad-9d33-90ef10e334f9",
+			organizationId: "442adb6e-fa58-47f3-9ca2-ed1fecdfe86c",
+			organizationName: "HR-PowerSuite",
+			contactName: "Doug Drewry",
+			contactPhone: "920-555-1212",
+			contactEmail: "doug.drewry@hr.com",
+			productName: "WildCat Application Gateway",
+			licenseType: "core-prod",
+			licenseMax: 16,
+			licenseAllocated: 16,
 			comment: "I AM A PROD PROPERTY OVERRIDE - changed after service started"
 		},
 		{
-			licenseId: "t9876f8c-c338-4abc-zf6a-ttt1",
-			organizationId: "e254f8c-c442-4ebe-a82a-e2fc1d1ff78a",
-			organizationName: "customer-crm-co",
-			contactName: "Mark Balster",
-			contactPhone: "823-555-1212",
-			contactEmail: "mark.balster@custcrmco.com",
-			productName: "suitability-plus",
+			licenseId: "38777179-7094-4200-9d61-edb101c6ea84",
+			organizationId: "442adb6e-fa58-47f3-9ca2-ed1fecdfe86c",
+			organizationName: "HR-PowerSuite",
+			contactName: "Doug Drewry",
+			contactPhone: "920-555-1212",
+			contactEmail: "doug.drewry@hr.com",
+			productName: "HR-PowerSuite",
 			licenseType: "user",
-			licenseMax: 200,
-			licenseAllocated: 189,
+			licenseMax: 100,
+			licenseAllocated: 4,
 			comment: "I AM A PROD PROPERTY OVERRIDE - changed after service started"
 		}
 	]
 ```
-#### Step 7: Stop eureka server, you can still get license with organization information successfully. Because the clint-side load balancer cached the pyhsical location of service instances.
+#### If you stop eureka server, you can still get license with organization information successfully. Because the clint-side load balancer cached the pyhsical location of service instances.
 
 ## Recap: Spring Cloud Supported clients of Service Discovery 
 #### Service discovery in action using Spring and Netflix Eureka
@@ -94,7 +81,7 @@ Open browser and try to access service *http://localhost:12704/v1/organizations/
 - Service Discovery Server configuration, application.yml
 ```yml
 server:
-  port: 10704
+  port: 10002
 
 spring:
   application:
@@ -126,7 +113,7 @@ spring:
   application:
     name: organizationservice #Logical name/application ID of the service that will be registered with Eureka, will represent a group service instance(normally, this property should be configured in bootstrap.yml)
 server:
-  port: 11704
+  port: 10004
 eureka:
   instance:
     preferIpAddress: true #Register the IP of the service rather than the server name
@@ -134,7 +121,7 @@ eureka:
     registerWithEureka: true #Register the service with Eureka
     fetchRegistry: true #Pull down a local copy of the registry
     serviceUrl:
-        defaultZone: http://host.docker.internal:10704/eureka/ #Location of the Eureka Service
+        defaultZone: http://host.docker.internal:10002/eureka/ #Location of the Eureka Service
 ```
 ##### Step 3: Client side, using different client of service discovery to look up a service
 ###### Option 1: Spring Discovery client
@@ -142,7 +129,7 @@ eureka:
 - Then in your code, you will be able to autowire instance of DiscoveryClient(org.springframework.cloud.client.discovery.DiscoveryClient), which has ablity to get service instance by service logic name, a.k.a. application id.
 - The ServiceInstance class is used to hold information about a specific instance of a service including its hostname, port and URI
 - Finally, use a standerd spring REST template class to call the service via uri  
-You will be able to use `http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/t9876f8c-c338-4abc-zf6a-ttt1/discovery/` to test this implementation.
+You will be able to use `http://localhost:10003/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/t9876f8c-c338-4abc-zf6a-ttt1/discovery/` to test this implementation.
 ###### Option 2: Spring Discovery client enabled RestTemplate
 - Carry out Load Balanced RestTemplate Bean within Spring Boot Application,
 ```java
@@ -170,7 +157,7 @@ You will be able to use `http://localhost:12704/v1/organizations/e254f8c-c442-4e
 		}
 	}
 ```
-You will be able to use `http://localhost:12704/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/t9876f8c-c338-4abc-zf6a-ttt1/rest/` to test this implementation.
+You will be able to use `http://localhost:10003/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/t9876f8c-c338-4abc-zf6a-ttt1/rest/` to test this implementation.
 ###### Option 3: Netflix Feign client `Andy Awared`
 An alternative to the Spring Ribbon-enabled RestTemplate class is Netflix’s Feign client library. The Feign library takes a different approach to calling a REST service by having the developer first define a Java interface and then annotating that interface with Spring Cloud annotations to map what Eureka-based service Ribbon will invoke. The Spring Cloud framework will dynamically generate a proxy class that will be used to invoke the targeted REST service. There’s no code being written for calling the service other than an interface definition.
 - Enable Feign client on spring boot application with annotation @EnableFeignClients. 
@@ -189,5 +176,6 @@ An alternative to the Spring Ribbon-enabled RestTemplate class is Netflix’s Fe
 ```java
 	organization = organizationFeignClient.getOrganization(organizationId);
 ```
+You will be able to use `http://localhost:10003/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/t9876f8c-c338-4abc-zf6a-ttt1/feign/` to test this implementation.
 
  
