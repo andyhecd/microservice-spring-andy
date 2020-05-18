@@ -35,35 +35,35 @@ There are four client resiliency patterns:
    - fallback
    - bulkhead
 ```java
-	@HystrixCommand(fallbackMethod = "buildFallbackLicenseList", threadPoolKey = "licenseByOrgThreadPool", threadPoolProperties = {
-			// define the maximum number of threads in the thread pool, default to 10
-			@HystrixProperty(name = "coreSize", value = "30"),
-			// define a queue that sits in front of your thread
-			// pool and that can queue incoming requests, default to -1(no queue is used and
-			// instead Hystrix will block until a thread becomes available for processing.)
-			@HystrixProperty(name = "maxQueueSize", value = "10") }, commandProperties = {
-					// set the length of the timeout (in milliseconds) of the circuit breaker,
-					// default is 1000
-					@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-					// amount of consecutive calls that must occur within a 10-second window before
-					// Hystrix will consider to trip the circuit breaker for the call. Default to 20
-					@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
-					// the percentage of calls that must fail(due to timeouts, an exception being
-					// thrown, or a HTTP 500 being returned) after the
-					// circuitBreaker.requestVolumeThreshold value has been passed before the
-					// circuit breaker it tripped, Default to 50
-					@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "75"),
-					// the amount of time Hystrix will sleep once the circuit breaker is tripped
-					// before Hystrix will allow another call through to see if the service is
-					// healthy again. Default to 5000
-					@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000"),
-					// control the size of the window that will be used by Hystrix to monitor for
-					// problems with a service call, default to 10000, a.k.a 10-second window,
-					// Default to 10000
-					@HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "15000"),
-					// control the number of times statistics are collected in the window you’ve
-					// defined, Default to 10
-					@HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "5") })
+@HystrixCommand(fallbackMethod = "buildFallbackLicenseList", threadPoolKey = "licenseByOrgThreadPool", threadPoolProperties = {
+	// define the maximum number of threads in the thread pool, default to 10
+	@HystrixProperty(name = "coreSize", value = "30"),
+	// define a queue that sits in front of your thread
+	// pool and that can queue incoming requests, default to -1(no queue is used and
+	// instead Hystrix will block until a thread becomes available for processing.)
+	@HystrixProperty(name = "maxQueueSize", value = "10") }, commandProperties = {
+		// set the length of the timeout (in milliseconds) of the circuit breaker,
+		// default is 1000
+		@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
+		// amount of consecutive calls that must occur within a 10-second window before
+		// Hystrix will consider to trip the circuit breaker for the call. Default to 20
+		@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+		// the percentage of calls that must fail(due to timeouts, an exception being
+		// thrown, or a HTTP 500 being returned) after the
+		// circuitBreaker.requestVolumeThreshold value has been passed before the
+		// circuit breaker it tripped, Default to 50
+		@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "75"),
+		// the amount of time Hystrix will sleep once the circuit breaker is tripped
+		// before Hystrix will allow another call through to see if the service is
+		// healthy again. Default to 5000
+		@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000"),
+		// control the size of the window that will be used by Hystrix to monitor for
+		// problems with a service call, default to 10000, a.k.a 10-second window,
+		// Default to 10000
+		@HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "15000"),
+		// control the number of times statistics are collected in the window you’ve
+		// defined, Default to 10
+		@HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "5") })
 	public List<License> getLicensesByOrgWithSleep(String organizationId, int sleppInMilliseconds) {
 		sleep(sleppInMilliseconds);
 		return getLicensesByOrg(organizationId);
