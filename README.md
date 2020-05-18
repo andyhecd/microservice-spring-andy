@@ -15,6 +15,9 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 > Chapter 4: [Building microservices with Spring Cloud Service Discovery](./chapter4.md)
 >> Quick verify (http://localhost:10003/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/)
 ***
+> Chapter 5: [Client resiliency patterns with Spring Cloud and Netflix](./chapter5.md)
+>> Quick verify (http://localhost:10003/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/sleep/1000000)
+***
 ### About HOST:
 profile dev configured to connect mysql installed on the local pc, a.k.a connect to: localhost:3306
 ```
