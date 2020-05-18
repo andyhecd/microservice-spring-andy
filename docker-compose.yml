@@ -10,7 +10,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     ports:
-      - 10700:3306
+      - 10000:3306
 
   config-server:
     restart: on-failure
