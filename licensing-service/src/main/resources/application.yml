@@ -7,9 +7,16 @@ eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
+    #eureka client刷新本地缓存时间
+    #默认30s
+    #registryFetchIntervalSeconds: 5
     serviceUrl:
         defaultZone: http://host.docker.internal:10002/eureka/
 
+#eureka客户端ribbon刷新时间
+#默认30s
+#ribbon:
+#  ServerListRefreshInterval: 5000
 
 management:
   endpoint:
@@ -23,3 +30,9 @@ management:
 #will be overwrote
 example:
   property: NaN
+
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.sap.andyhecd.microservice: DEBUG
