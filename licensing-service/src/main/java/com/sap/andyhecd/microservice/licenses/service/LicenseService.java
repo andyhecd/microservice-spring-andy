@@ -41,33 +41,33 @@ public class LicenseService {
 	@Autowired
 	OrganizationDiscoveryClient organizationDiscoveryClient;
 
-	private Organization retrieveOrgInfo(String organizationId, String clientType) {
+	private Organization retrieveOrgInfo(final String organizationId, final String clientType) {
 		Organization organization = null;
 
 		switch (clientType) {
-		case "feign":
-			System.out.println("I am using the feign client");
-			organization = organizationFeignClient.getOrganization(organizationId);
-			break;
-		case "rest":
-			System.out.println("I am using the rest client");
-			organization = organizationRestClient.getOrganization(organizationId);
-			break;
-		case "discovery":
-			System.out.println("I am using the discovery client");
-			organization = organizationDiscoveryClient.getOrganization(organizationId);
-			break;
-		default:
-			organization = organizationRestClient.getOrganization(organizationId);
+			case "feign":
+				System.out.println("I am using the feign client");
+				organization = organizationFeignClient.getOrganization(organizationId);
+				break;
+			case "rest":
+				System.out.println("I am using the rest client");
+				organization = organizationRestClient.getOrganization(organizationId);
+				break;
+			case "discovery":
+				System.out.println("I am using the discovery client");
+				organization = organizationDiscoveryClient.getOrganization(organizationId);
+				break;
+			default:
+				organization = organizationRestClient.getOrganization(organizationId);
 		}
 
 		return organization;
 	}
 
-	public License getLicense(String organizationId, String licenseId, String clientType) {
-		License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
+	public License getLicense(final String organizationId, final String licenseId, final String clientType) {
+		final License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
 
-		Organization org = retrieveOrgInfo(organizationId, clientType);
+		final Organization org = retrieveOrgInfo(organizationId, clientType);
 
 		return license.withOrganizationName(org.getName()).withContactName(org.getContactName())
 				.withContactEmail(org.getContactEmail()).withContactPhone(org.getContactPhone())
@@ -103,15 +103,15 @@ public class LicenseService {
 					// control the number of times statistics are collected in the window you’ve
 					// defined, Default to 10
 					@HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "5") })
-	public List<License> getLicensesByOrgWithSleep(String organizationId, int sleppInMilliseconds) {
+	public List<License> getLicensesByOrgWithSleep(final String organizationId, final int sleppInMilliseconds) {
 		sleep(sleppInMilliseconds);
 		return getLicensesByOrg(organizationId);
 	}
 
-	public List<License> getLicensesByOrg(String organizationId) {
+	public List<License> getLicensesByOrg(final String organizationId) {
 		logger.debug("LicenseService.getLicensesByOrg  Correlation id: {}",
 				UserContextHolder.getContext().getCorrelationId());
-		List<License> findByOrganizationId = licenseRepository.findByOrganizationId(organizationId);
+		final List<License> findByOrganizationId = licenseRepository.findByOrganizationId(organizationId);
 		final Organization org = retrieveOrgInfo(organizationId, "feign");
 		if (Objects.nonNull(org)) {
 			findByOrganizationId.stream().forEach(license -> {
@@ -123,36 +123,34 @@ public class LicenseService {
 		return findByOrganizationId;
 	}
 
-	private void sleep(int sleppInMilliseconds) {
+	private void sleep(final int sleppInMilliseconds) {
 		try {
 			Thread.sleep(sleppInMilliseconds);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@SuppressWarnings("unused")
-	private List<License> buildFallbackLicenseList(String organizationId, int sleppInMilliseconds) {
-		List<License> fallbackList = new ArrayList<>();
-		License license = new License().withId("0000000-00-00000").withOrganizationId(organizationId)
+	private List<License> buildFallbackLicenseList(final String organizationId, final int sleppInMilliseconds) {
+		final List<License> fallbackList = new ArrayList<>();
+		final License license = new License().withId("0000000-00-00000").withOrganizationId(organizationId)
 				.withProductName("Sorry no licensing information currently available");
 
 		fallbackList.add(license);
 		return fallbackList;
 	}
 
-	public void saveLicense(License license) {
+	public void saveLicense(final License license) {
 		license.withId(UUID.randomUUID().toString());
-
-		licenseRepository.save(license);
-
-	}
-
-	public void updateLicense(License license) {
 		licenseRepository.save(license);
 	}
 
-	public void deleteLicense(License license) {
+	public void updateLicense(final License license) {
+		licenseRepository.save(license);
+	}
+
+	public void deleteLicense(final License license) {
 		licenseRepository.delete(license);
 	}
 

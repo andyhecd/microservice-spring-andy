@@ -16,12 +16,12 @@ public class DiscoveryService {
     @Autowired
     private DiscoveryClient discoveryClient;
 
-    public List<String> getEurekaServices(){
-       List<String> services = new ArrayList<String>();
+    public List<String> getEurekaServices() {
+        List<String> services = new ArrayList<String>();
 
         discoveryClient.getServices().forEach(serviceName -> {
-            discoveryClient.getInstances(serviceName).forEach(instance->{
-                services.add( String.format("%s:%s",serviceName,instance.getUri()));
+            discoveryClient.getInstances(serviceName).forEach(instance -> {
+                services.add(String.format("%s:%s", serviceName, instance.getUri()));
             });
         });
 
