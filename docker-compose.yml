@@ -33,6 +33,16 @@ services:
       - 10002
     ports:
       - 10002:10002
+    depends_on:
+      - config-server
+    environment:
+      - PROFILE=prod
+      - ENCRYPT_KEY=IMSYMMETRIC
+      - WAIT_HOSTS=config-server:10001
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    command: sh -c "/wait && /run.sh"
 
   organization-service:
     restart: on-failure
