@@ -11,7 +11,7 @@ eureka:
     #默认30s
     #registryFetchIntervalSeconds: 5
     serviceUrl:
-        defaultZone: http://host.docker.internal:10002/eureka/
+        defaultZone: http://${com.sap.andyhecd.microservice.eureka.server.host}:${com.sap.andyhecd.microservice.eureka.server.port}/eureka/
 
 #eureka客户端ribbon刷新时间
 #默认30s

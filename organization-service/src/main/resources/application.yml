@@ -14,6 +14,6 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://host.docker.internal:10002/eureka/
+      defaultZone: http://${com.sap.andyhecd.microservice.eureka.server.host}:${com.sap.andyhecd.microservice.eureka.server.port}/eureka/
     healthcheck:
       enabled: true

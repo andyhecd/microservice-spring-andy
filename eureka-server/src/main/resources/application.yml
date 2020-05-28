@@ -1,5 +1,5 @@
 server:
-  port: 10002
+  port: ${com.sap.andyhecd.microservice.eureka.server.port}
 
 spring:
   application:
@@ -7,7 +7,7 @@ spring:
 
 eureka:
   instance:
-    hostname: host.docker.internal
+    hostname: ${com.sap.andyhecd.microservice.eureka.server.host}
   client:
     registerWithEureka: false
     fetchRegistry: false

@@ -1,1 +1,3 @@
-  example.organization.property: "I AM THE DEFAULT ORGANIZATION SERVICE"
+example.organization.property: "I AM THE DEFAULT ORGANIZATION SERVICE"
+com.sap.andyhecd.microservice.eureka.server.host: host.docker.internal
+com.sap.andyhecd.microservice.eureka.server.port: 10002

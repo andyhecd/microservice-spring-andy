@@ -1,4 +1,6 @@
 example.organization.property: "I AM THE DEFAULT ORGANIZATION SERVICE"
+com.sap.andyhecd.microservice.eureka.server.host: host.docker.internal
+com.sap.andyhecd.microservice.eureka.server.port: 10002
 spring.datasource.url: jdbc:mysql://host.docker.internal:10000/microservice
 spring.datasource.username: root
 spring.datasource.password: "{cipher}4cb80d272c4ba0f8b84eb441530c8faddaca79073916e496b951cd5eefa88910"
