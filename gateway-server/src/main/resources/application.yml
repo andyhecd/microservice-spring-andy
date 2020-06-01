@@ -1,0 +1,35 @@
+server:
+  port: 10005
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写
+      routes:
+        - id: licensing_service_examplestring_route #路由的ID
+          uri: ${service-url.licensing-service}/examplestring #匹配后路由地址
+          predicates: # 断言，路径相匹配的进行路由
+            - Path=/examplestring
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${com.sap.andyhecd.microservice.eureka.server.host}:${com.sap.andyhecd.microservice.eureka.server.port}/eureka/
+    healthcheck:
+      enabled: true
+
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway

@@ -19,7 +19,7 @@ All the practices are relevant to book Manning Spring Micro-services in Action 2
 >> Quick verify (http://localhost:10003/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/sleep/1000000)
 ***
 > Chapter 6: [Service Routing with Sping Cloud](./documents/chapter6.md)
-To Be Continued
+>> Quick verify (http://localhost:10005/licensingservice/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/)
 ***
 ### About HOST:
 profile dev configured to connect mysql installed on the local pc, a.k.a connect to: localhost:3306

@@ -15,6 +15,91 @@ Notes:
 
 ## Implementation based on Spring Cloud Gateway
 Manning Spring Microservice in Action version 2017.6 impelemnts service routing by Zuul. On 2020, Zuul is out of date, I use spring cloud gateway instead.
+- Add maven dependency(add eureka client, actuator and Spring config in as well)
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+```
+- Enable Eureka client
+```yml
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${com.sap.andyhecd.microservice.eureka.server.host}:${com.sap.andyhecd.microservice.eureka.server.port}/eureka/
+    healthcheck:
+      enabled: true
+```
+- Enable acturator endpoint
+```yml
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+```
+- Enable gateway with Eureka
+```yml
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写
+```
+- Till now, you will see auto mapped routes eureka and spring gateway via accessing *http://localhost:10005/actuator/gateway/routes*
+```json
+[
+	{
+		predicate: "Paths: [/gatewayserver/**], match trailing slash: true",
+		metadata: {
+			management.port: "10005"
+		},
+		route_id: "ReactiveCompositeDiscoveryClient_GATEWAYSERVER",
+		filters: [
+			"[[RewritePath /gatewayserver/(?<remaining>.*) = '/${remaining}'], order = 1]"
+		],
+		uri: "lb://GATEWAYSERVER",
+		order: 0
+	},
+	{
+		predicate: "Paths: [/licensingservice/**], match trailing slash: true",
+		metadata: {
+			management.port: "10003"
+		},
+		route_id: "ReactiveCompositeDiscoveryClient_LICENSINGSERVICE",
+		filters: [
+			"[[RewritePath /licensingservice/(?<remaining>.*) = '/${remaining}'], order = 1]"
+		],
+		uri: "lb://LICENSINGSERVICE",
+		order: 0
+	},
+	{
+		predicate: "Paths: [/organizationservice/**], match trailing slash: true",
+		metadata: {
+			management.port: "10004"
+		},
+		route_id: "ReactiveCompositeDiscoveryClient_ORGANIZATIONSERVICE",
+		filters: [
+			"[[RewritePath /organizationservice/(?<remaining>.*) = '/${remaining}'], order = 1]"
+		],
+		uri: "lb://ORGANIZATIONSERVICE",
+		order: 0
+	}
+]
+```
+- Which means you will be able to access services from licensing service module via:
+> http://localhost:10005/licensingservice/v1/organizations/e254f8c-c442-4ebe-a82a-e2fc1d1ff78a/licenses/
+> The gateway host and Eureka server awared application registered.
 
 
  
