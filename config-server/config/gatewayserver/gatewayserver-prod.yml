@@ -1,0 +1,13 @@
+com:
+  sap:
+    andyhecd:
+      microservice:
+        eureka:
+          server:
+            host: host.docker.internal
+            port: 10002
+
+service-url:
+  licensing-service: http://host.docker.internal:10003
+  organization-service: http://host.docker.internal:10004
+  eureka-service: http://host.docker.internal:10002

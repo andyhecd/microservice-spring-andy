@@ -9,7 +9,7 @@ spring:
           uri: https://github.com/andyhecd/microservice-spring-andy
           #uri: https://github.com/carnellj/config-repo/
           default-label: master #配置文件分支
-          searchPaths: config-server/config/licensingservice,config-server/config/organizationservice,config-server/config/eurekaserver
+          searchPaths: config-server/config/licensingservice,config-server/config/organizationservice,config-server/config/eurekaserver,config-server/config/gatewayserver
           username: andyhecd
           password: Xiao0001
 

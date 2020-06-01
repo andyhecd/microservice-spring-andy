@@ -1,0 +1,18 @@
+com:
+  sap:
+    andyhecd:
+      microservice:
+        eureka:
+          server:
+            host: localhost
+            port: 10002
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+    com.sap.andyhecd.microservice.gateway: debug
+
+service-url:
+  licensing-service: http://localhost:10003
+  organization-service: http://localhost:10004
+  eureka-service: http://localhost:10002
