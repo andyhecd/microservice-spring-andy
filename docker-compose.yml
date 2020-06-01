@@ -44,6 +44,27 @@ services:
       - WAIT_HOST_CONNECT_TIMEOUT=30
     command: sh -c "/wait && /run.sh"
 
+  gateway-server:
+    restart: on-failure
+    build: ./gateway-server
+    image: andyhecd/gateway-server:0.0.1-SNAPSHOT
+    container_name: gateway-server
+    expose:
+      - 10005
+    ports:
+      - 10005:10005
+    depends_on:
+      - config-server
+      - eureka-server
+    environment:
+      - PROFILE=prod
+      - ENCRYPT_KEY=IMSYMMETRIC
+      - WAIT_HOSTS=config-server:10001, eureka-server:10002
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    command: sh -c "/wait && /run.sh"
+
   organization-service:
     restart: on-failure
     build: ./organization-service
